@@ -10,7 +10,7 @@ public class Player {
     final String status;
     final List<Card> cards;
 
-    Player(String name, int balance, int bet, String status, List<Card> cards) {
+    public Player(String name, int balance, int bet, String status, List<Card> cards) {
         this.name = name;
         this.balance = balance;
         this.bet = bet;

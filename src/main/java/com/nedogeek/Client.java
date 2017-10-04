@@ -29,7 +29,7 @@ public class Client {
 
             WebSocketClient client = factory.newWebSocketClient();
 
-            connection = client.open(new URI(SERVER + "?user=" + userName + "&password=" + password), new OnTextMessage() {
+            connection = client.open(new URI(SERVER + "?user=" + USER_NAME + "&password=" + PASSWORD), new OnTextMessage() {
                 public void onOpen(Connection connection) {
                     System.out.println("Opened");
                 }
@@ -40,9 +40,10 @@ public class Client {
 
                 public void onMessage(String data) {
                     board.parseMessage(data);
+                    board.setMyPlayer();
                     System.out.println(data);
 
-                    if (userName.equals(board.getMover())) {
+                    if (USER_NAME.equals(board.getMover())) {
                         try {
                             doAnswer();
                         } catch (IOException e) {
