@@ -88,11 +88,9 @@ public class Board {
     }
 
     public double calculateProbability() {
-        if(!myPlayer.cards.isEmpty()) {
-            double coeff = calculator.onHandCardCoefficient(myPlayer.cards);
-            System.out.println("ia blind coefficient == " + coeff);
-        }
-        return 0d;
+        double coeff = calculator.onHandCardCoefficient(myPlayer.cards);
+        System.out.println("ia blind coefficient == " + coeff);
+        return coeff;
     }
 
     public void setMyPlayer(){

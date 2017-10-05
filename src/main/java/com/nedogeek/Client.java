@@ -1,12 +1,13 @@
 package com.nedogeek;
 
 import com.nedogeek.calculate.strategy.Strategy;
-import com.nedogeek.calculate.strategy.impl.LowStrategy;
+import com.nedogeek.calculate.strategy.impl.HighStrategy;
+import com.nedogeek.entity.Board;
+import com.nedogeek.entity.Rounds;
 import org.eclipse.jetty.websocket.WebSocket.Connection;
 import org.eclipse.jetty.websocket.WebSocket.OnTextMessage;
 import org.eclipse.jetty.websocket.WebSocketClient;
 import org.eclipse.jetty.websocket.WebSocketClientFactory;
-import com.nedogeek.entity.Board;
 
 import java.io.IOException;
 import java.net.URI;
@@ -17,7 +18,7 @@ import static com.nedogeek.Credentials.*;
 public class Client {
 
     private Connection connection;
-    private Strategy strategy = new LowStrategy();
+    private Strategy strategy = new HighStrategy();
 
     private Board board = new Board();
 
@@ -66,7 +67,17 @@ public class Client {
 
     private void doAnswer() throws IOException {
         double coeff = board.calculateProbability();
-        connection.sendMessage(Commands.Call.toString());
+        if(board.getGameRound().equals(Rounds.BLIND.toString())) {
+            if (board.getMover().equals(Credentials.USER_NAME)) {
+                if(isBlind(coeff)){
+                    connection.sendMessage(Commands.Call.toString());
+                } else {
+                    connection.sendMessage(Commands.Fold.toString());
+                }
+            }
+        } else {
+            connection.sendMessage(Commands.Call.toString());
+        }
     }
 
     private boolean isBlind(double coeff){

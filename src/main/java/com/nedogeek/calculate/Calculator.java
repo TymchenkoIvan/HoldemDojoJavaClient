@@ -32,9 +32,7 @@ public class Calculator {
     }
 
     public double onHandCardCoefficient(List<Card> cards){
-        for (Card card: cards) {
-            System.out.println(card);
-        }
+        cards.forEach(System.out::println);
 
         double coeff = getCardValuesSum(cards);
         if(isPair(cards)){

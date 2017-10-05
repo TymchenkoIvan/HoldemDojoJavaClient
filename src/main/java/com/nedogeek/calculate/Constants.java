@@ -6,8 +6,8 @@ public class Constants {
     public static final double POSSIBLE_STRAIGHT_COEFF = 1.1;
 
     //settings for LOW STRATEGY
-    public static final double LOW_BLIND_COEFF = 20;
+    public static final double LOW_BLIND_COEFF = 15;
 
     //settings for HIGH STRATEGY
-    public static final double HIGH_BLIND_COEFF = 40;
+    public static final double HIGH_BLIND_COEFF = 30;
 }
