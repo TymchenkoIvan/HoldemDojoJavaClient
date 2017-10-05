@@ -1,8 +1,8 @@
 package com.nedogeek.entity;
 
-import com.nedogeek.Calculator;
 import com.nedogeek.Credentials;
 import com.nedogeek.Parser;
+import com.nedogeek.calculate.Calculator;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -88,8 +88,11 @@ public class Board {
     }
 
     public double calculateProbability() {
-        calculator.onHandCardCoefficient(myPlayer.cards);
-        return 0.0d;
+        if(!myPlayer.cards.isEmpty()) {
+            double coeff = calculator.onHandCardCoefficient(myPlayer.cards);
+            System.out.println("ia blind coefficient == " + coeff);
+        }
+        return 0d;
     }
 
     public void setMyPlayer(){

@@ -1,5 +1,7 @@
 package com.nedogeek;
 
+import com.nedogeek.calculate.strategy.Strategy;
+import com.nedogeek.calculate.strategy.impl.LowStrategy;
 import org.eclipse.jetty.websocket.WebSocket.Connection;
 import org.eclipse.jetty.websocket.WebSocket.OnTextMessage;
 import org.eclipse.jetty.websocket.WebSocketClient;
@@ -15,6 +17,7 @@ import static com.nedogeek.Credentials.*;
 public class Client {
 
     private Connection connection;
+    private Strategy strategy = new LowStrategy();
 
     private Board board = new Board();
 
@@ -64,5 +67,9 @@ public class Client {
     private void doAnswer() throws IOException {
         double coeff = board.calculateProbability();
         connection.sendMessage(Commands.Call.toString());
+    }
+
+    private boolean isBlind(double coeff){
+        return strategy.isBlind(coeff);
     }
 }

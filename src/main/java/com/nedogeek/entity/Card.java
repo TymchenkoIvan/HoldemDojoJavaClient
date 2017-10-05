@@ -13,4 +13,12 @@ public class Card {
     public String toString() {
         return "Card: " + value + " " + suit;
     }
+
+    public String getValue() {
+        return value;
+    }
+
+    public String getSuit() {
+        return suit;
+    }
 }
